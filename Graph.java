@@ -5,24 +5,24 @@ public class Graph {
 	public int numVertices;
 
 
-	public Graph(int numVertices) {
+	public Graph(int numVertices) throws GraphException {
 		this.create(numVertices);
 	}
 
-	public void create(int numVertices)throws  IndexOutOfBoundsException {
+	public void create(int numVertices)throws  GraphException {
 		if (numVertices>0) {
-		this.numVertices=numVertices;
-		matriz = new int [numVertices][numVertices];
+			this.numVertices=numVertices;
+			matriz = new int [numVertices][numVertices];
+		}else {
+			throw new GraphException();
 		}
-		throw new IndexOutOfBoundsException("Invalid index!");
 	}
-
-	public void addEdge(int i, int j)throws  IndexOutOfBoundsException {
+	public void addEdge(int i, int j)throws  GraphException  {
 		if (numVertices>0 && i<=numVertices && j<=numVertices) {
 			matriz[--i][--j]=1;
 			System.out.println("Added!");
 		}else {
-			throw new IndexOutOfBoundsException("Invalid index!");
+			throw new GraphException ();
 		}
 	}
 
@@ -62,16 +62,15 @@ public class Graph {
 
 
 
-	public void removeEdge(int i, int j) throws EmptyGraphException, IndexOutOfBoundsException{
-		if (numVertices==0) {
-			throw new EmptyGraphException();
+	public void removeEdge(int i, int j) throws  GraphException{
+		if(i<0 || i>numVertices || j<0 ||  j>numVertices) {
+			throw new GraphException();
 		}
 		if (matriz[--i][--j]==1) {
 			matriz[i][j]=0;
+			System.out.println("removed!");
 		}
-		else {
-			throw new IndexOutOfBoundsException("Invalid index!");
-		}
+		
 	}
 
 	public void print() {
@@ -87,7 +86,10 @@ public class Graph {
 				}
 			}
 		}
+
 		System.out.println("}");
+
+
 	}
 	public int numOfVertices() {
 		return numVertices;
