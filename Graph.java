@@ -63,12 +63,12 @@ public class Graph {
 
 
 	public void removeEdge(int i, int j) throws  GraphException{
-		if(i<0 || i>numVertices || j<0 ||  j>numVertices) {
+		if (i<0 || i>numVertices || j<0 ||  j>numVertices) {
 			throw new GraphException();
 		}
-		if (matriz[--i][--j]==1) {
+		else if (matriz[--i][--j]==1) {
 			matriz[i][j]=0;
-			System.out.println("removed!");
+			System.out.println("Removed!");
 		}
 		
 	}
